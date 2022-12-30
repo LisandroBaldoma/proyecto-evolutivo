@@ -1,3 +1,7 @@
+/**
+ * Ejercicios sesiones 1,2 y 3
+ */
+
 import React from "react";
 import { Contacto } from "../../models/contact.class";
 import ComponentB from "../pure/ComponentB";
