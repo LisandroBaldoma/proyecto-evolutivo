@@ -1,18 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 //import ComponentA from './components/container/ComponentA';
-import Clock from './components/container/Clock';
-
+//import Clock from './components/container/Clock';
+import ContactList from "./components/container/ContactList";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        {/*<ComponentA></ComponentA> EJERCICIOS SESIONES 1,2 Y 3*/}
-        {/*EJERCICIOS SESIONES 4,5 Y 6*/}
-        <Clock></Clock>               
-      </header>
+      {/*<ComponentA></ComponentA> EJERCICIOS SESIONES 1,2 Y 3*/}
+      {/*EJERCICIOS SESIONES 4,5 Y 6*/}
+      {/*<Clock></Clock>*/}
+      {/*EJERCICIOS SESIONES 7,8 Y 9*/}
+      <ContactList></ContactList>
     </div>
   );
 }

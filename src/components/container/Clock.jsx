@@ -8,12 +8,14 @@ export default function Clock() {
   const [estado, setEstado] = useState({
     fecha: new Date(),
     edad: 0,
-    nombre: "Martin",
-    apellido: "San José",
+    nombre: "Lisandro",
+    apellido: "Baldoma",
   });
 
   function tick() {
-    setEstado({ ...estado, edad: estado.edad + 1, fecha: new Date() });
+    setEstado({ ...estado, 
+      edad: estado.edad + 1, 
+      fecha: new Date() });
   }
 
   useEffect(() => {
