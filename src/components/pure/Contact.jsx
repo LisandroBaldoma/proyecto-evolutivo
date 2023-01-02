@@ -29,9 +29,9 @@ const Contact = ({ contact, conectado, deleted }) => {
   }
   function accionIcon() {
     if (contact.conectado) {
-      return <ToggleOn color="royalblue" onClick={() => conectado(contact)} />;
+      return <ToggleOn className= "accion" color="royalblue" onClick={() => conectado(contact)} />;
     } else {
-      return <ToggleOff color="royalblue" onClick={() => conectado(contact)} />;
+      return <ToggleOff className= "accion" color="royalblue" onClick={() => conectado(contact)} />;
     }
   }
 
@@ -42,7 +42,7 @@ const Contact = ({ contact, conectado, deleted }) => {
       <th>{contact.email}</th>
       <th>{estadoBagde()}</th>
       <th>
-        {accionIcon()} <Trash color="red" onClick={() => deleted(contact)} />
+        {accionIcon()} <Trash className= "accion" color="red" onClick={() => deleted(contact)} />
       </th>
     </tr>
   );
