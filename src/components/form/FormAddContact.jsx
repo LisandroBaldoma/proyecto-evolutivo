@@ -6,8 +6,9 @@ import Button from "react-bootstrap/Button";
 import { ESTADO } from "../../models/estados.enum";
 import PropTypes from "prop-types";
 import { Contacto } from "../../models/contact.class";
+import FormGroup from "react-bootstrap/esm/FormGroup";
 
-const FormAddContact = ({ add }) => {
+const FormAddContact = ({ add, nContacts }) => {
   const inputNombreRef = useRef("");
   const inputApellidoRef = useRef("");
   const inputEmailRef = useRef("");
@@ -21,7 +22,7 @@ const FormAddContact = ({ add }) => {
       inputNombreRef.current.value,
       inputApellidoRef.current.value,
       inputEmailRef.current.value,
-      inputEstadoRef.current.value === "1" ? true : false
+      inputEstadoRef.current.value === ESTADO.ONLINE ? true : false,      
     );
     add(newContact);
     limpiarForm();
@@ -31,17 +32,22 @@ const FormAddContact = ({ add }) => {
     inputNombreRef.current.value = "";
     inputApellidoRef.current.value = "";
     inputEmailRef.current.value = "";
-    inputEstadoRef.current.value = "1";
+    inputEstadoRef.current.value = ESTADO.ONLINE;
   }
 
   return (
-    <Form onSubmit={addContact} className="mt-3">
-      <Form.Group as={Row} className="mb-3" controlId="validationCustom01">
+    <Form onSubmit={addContact} className="mt-3 d-flex flex-column">
+      <Form.Group
+        as={Row}
+        className="mb-3 justify-content-center"
+        controlId="validationCustom01"
+      >
         <Form.Label column sm="2">
           Nombre
         </Form.Label>
         <Col sm="4">
           <Form.Control
+            autoFocus            
             type="text"
             placeholder="Ingrese Nombre"
             ref={inputNombreRef}
@@ -49,12 +55,16 @@ const FormAddContact = ({ add }) => {
           />
         </Col>
       </Form.Group>
-      <Form.Group as={Row} className="mb-3" controlId="validationCustom01">
+      <Form.Group
+        as={Row}
+        className="mb-3 justify-content-center"
+        controlId="validationCustom01"
+      >
         <Form.Label column sm="2">
           Apellido
         </Form.Label>
         <Col sm="4">
-          <Form.Control
+          <Form.Control            
             type="text"
             placeholder="Ingrese Apellido"
             ref={inputApellidoRef}
@@ -62,42 +72,50 @@ const FormAddContact = ({ add }) => {
           />
         </Col>
       </Form.Group>
-      <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+      <Form.Group
+        as={Row}
+        className="mb-3 justify-content-center"
+        controlId="formPlaintextEmail"
+      >
         <Form.Label column sm="2">
           Email
         </Form.Label>
         <Col sm="4">
           <Form.Control
             type="email"
-            defaultValue=""
-            placeholder="Ingrese email"
+            placeholder="Email formato xxx@xxx.xxx"
             ref={inputEmailRef}
             required
           />
         </Col>
       </Form.Group>
-      <Form.Group as={Row} className="mb-3" controlId="validationCustom01">
+      <Form.Group
+        as={Row}
+        className="mb-3 justify-content-center"
+        controlId="validationCustom01"
+      >
         <Form.Label column sm="2">
           Estado
         </Form.Label>
         <Col sm="4">
           <Form.Select size="sm" ref={inputEstadoRef}>
-            <option value="1">{ESTADO.ONLINE}</option>
-            <option value="2">{ESTADO.OFFLINE}</option>
+            <option value={ESTADO.ONLINE}>{ESTADO.ONLINE}</option>
+            <option value={ESTADO.OFFLINE}>{ESTADO.OFFLINE}</option>
           </Form.Select>
         </Col>
       </Form.Group>
-      <Col sm="4"></Col>
-      <Button type="submit" variant="primary">
-        Add Contacto
-      </Button>
-      {""}
+      <FormGroup className="mb-3 justify-content-center">
+        <Button type="submit" variant="primary">
+          {nContacts === 0 ? 'Crear Contactos' : 'Agregar Contacto'}
+        </Button>
+      </FormGroup>
     </Form>
   );
 };
 
 FormAddContact.propTypes = {
   add: PropTypes.func.isRequired,
+  nContacts: PropTypes.number.isRequired,
 };
 
 export default FormAddContact;

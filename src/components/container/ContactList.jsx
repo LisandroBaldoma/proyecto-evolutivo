@@ -2,13 +2,14 @@
  * Ejercicios sesiones 7,8 y 9.
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Contacto } from "../../models/contact.class";
 import Contact from "../../components/pure/Contact";
 
 import FormAddContact from "../form/FormAddContact";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
+import Col from "react-bootstrap/Col";
 
 const ContactList = () => {
   const contact1 = new Contacto(
@@ -38,6 +39,17 @@ const ContactList = () => {
     contact4,
   ]);
 
+  // Ciclo de vida dell componente
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    console.log("Contacto modificado");
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
   function modificarEstado(contact) {
     const index = contacts.indexOf(contact);
     const tempContacts = [...contacts];
@@ -56,37 +68,54 @@ const ContactList = () => {
     setContacts(tempContacts);
   }
 
+  let contactTable;
+
+  if (contacts.length > 0) {
+    contactTable = (
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Estado</th>
+            <th>Accion</th>
+          </tr>
+        </thead>
+        <tbody>
+          {contacts.map((contact, index) => {
+            return (
+              <Contact
+                key={index}
+                contact={contact}
+                conectado={modificarEstado}
+                deleted={deletedContact}
+              ></Contact>
+            );
+          })}
+        </tbody>
+      </Table>
+    );
+  } else {
+    contactTable = (
+      <div className="text-danger border-bottom border-danger">
+        <h2>No hay contactos cargados en la Agenda</h2>
+        <h3>Por favor Crea un primer Contacto</h3>
+      </div>
+    );
+  }
+
   return (
     <div>
-      <Card>
-        <Card.Body>
-          <Card.Title>Agenda de Contactos</Card.Title>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Email</th>
-                <th>Estado</th>
-                <th>Accion</th>
-              </tr>
-            </thead>
-            <tbody>
-              {contacts.map((contact, index) => {
-                return (
-                  <Contact
-                    key={index}
-                    contact={contact}
-                    conectado={modificarEstado}
-                    deleted={deletedContact}
-                  ></Contact>
-                );
-              })}
-            </tbody>
-          </Table>
-        </Card.Body>
-      </Card>
-      <FormAddContact add={addContact}></FormAddContact>
+      <Col className="container text-center">
+        <Card style={{ backgroundColor: "azure" }}>
+          <Card.Body>
+            <Card.Title>Agenda de Contactos</Card.Title>
+            {loading ? "Cargando Contactos..." : contactTable}
+          </Card.Body>
+          <FormAddContact add={addContact} nContacts={contacts.length}></FormAddContact>
+        </Card>
+      </Col>
     </div>
   );
 };
