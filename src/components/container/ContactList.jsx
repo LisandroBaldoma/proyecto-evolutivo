@@ -5,11 +5,11 @@
 import React, { useState, useEffect } from "react";
 import { Contacto } from "../../models/contact.class";
 import Contact from "../../components/pure/Contact";
-
 import FormAddContact from "../form/FormAddContact";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 import Col from "react-bootstrap/Col";
+import FormAddContactFormik from "../form/FormAddContactFormik";
 
 const ContactList = () => {
   const contact1 = new Contacto(
@@ -113,7 +113,8 @@ const ContactList = () => {
             <Card.Title>Agenda de Contactos</Card.Title>
             {loading ? "Cargando Contactos..." : contactTable}
           </Card.Body>
-          <FormAddContact add={addContact} nContacts={contacts.length}></FormAddContact>
+          {/*<FormAddContact add={addContact} nContacts={contacts.length}></FormAddContact>*/}
+          <FormAddContactFormik add={addContact} nContacts={contacts.length}></FormAddContactFormik>
         </Card>
       </Col>
     </div>
