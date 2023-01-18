@@ -1,24 +1,27 @@
 import "./App.css";
-//import ComponentA from './components/container/ComponentA';
-//import Clock from './components/container/Clock';
-import ContactList from "./components/container/ContactList";
-//import Cuadrado  from "./components/container/Cuadrado";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import PageNotFound from "./pages/PageNotFound";
+import Agenda from "./pages/Agenda";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 function App() {
+  // TODO LOGGED DINAMICO
+  const logged = localStorage.getItem("credential");
+
   return (
-    <div className="App">
-     
-        {/*EJERCICIOS SESIONES 1,2 y 3*/}
-        {/*<ComponentA></ComponentA>*/}
-        {/*EJERCICIOS SESIONES 4,5 Y 6*/}
-        {/*<Clock></Clock>*/}
-        {/*EJERCICIOS SESIONES 7,8 y 9*/}
-        {/*EJERCICIOS SESIONES 10, 11 y 12*/}
-        {/*<Cuadrado></Cuadrado>*/}
-        <ContactList></ContactList>
-      
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={logged !== null ? <Agenda /> : <Navigate to="/login" />}
+        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
