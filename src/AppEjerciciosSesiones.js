@@ -1,11 +1,12 @@
 import "./App.css";
 //import ComponentA from './components/container/ComponentA';
 //import Clock from './components/container/Clock';
-import ContactList from "./components/container/ContactList";
+//import ContactList from "./components/container/ContactList";
 //import Cuadrado  from "./components/container/Cuadrado";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Jockes from "./components/pure/Jockes";
 
-function App() {
+function AppEjerciciosSesiones() {
   return (
     <div className="App">
      
@@ -16,10 +17,12 @@ function App() {
         {/*EJERCICIOS SESIONES 7,8 y 9*/}
         {/*EJERCICIOS SESIONES 10, 11 y 12*/}
         {/*<Cuadrado></Cuadrado>*/}
-        <ContactList></ContactList>
+        {/*<ContactList></ContactList>*/}
+        {/*EJERCICIOS SESIONES 19, 20 y 21*/}
+        <Jockes></Jockes>
       
     </div>
   );
 }
 
-export default App;
+export default AppEjerciciosSesiones;
